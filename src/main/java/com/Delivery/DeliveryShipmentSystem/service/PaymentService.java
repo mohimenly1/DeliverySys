@@ -41,7 +41,7 @@ public class PaymentService {
 
     public PaymentResponseDTO getPaymentById(Long id) {
         return paymentRepository.findById(id)
-                .map(PaymentMapper::toResponseDTO)
+                .map(PaymentMapper::toDTO)
                 .orElse(null);
     }
 

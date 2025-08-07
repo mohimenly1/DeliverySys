@@ -23,7 +23,7 @@ public class PaymentMapper {
         Payment payment = new Payment();
         payment.setAmount(dto.getAmount());
         payment.setStatus(dto.getStatus());
-        // shipment سيتم ربطه لاحقًا من الـ Service
+
         return payment;
     }
 }

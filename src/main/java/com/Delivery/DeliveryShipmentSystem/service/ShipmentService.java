@@ -42,4 +42,15 @@ public class ShipmentService {
                 .map(ShipmentMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public ShipmentResponseDTO getShipmentById(Long id) {
+        Shipment shipment = shipmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("الشحنة غير موجودة"));
+        return ShipmentMapper.toDTO(shipment);
+    }
+
+    public void deleteShipment(Long id) {
+        shipmentRepository.deleteById(id);
+    }
+
 }
