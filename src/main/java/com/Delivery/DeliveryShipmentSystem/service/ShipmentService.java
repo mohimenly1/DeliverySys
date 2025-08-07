@@ -31,6 +31,7 @@ public class ShipmentService {
                 .orElseThrow(() -> new RuntimeException("الزبون غير موجود"));
 
         Shipment shipment = ShipmentMapper.toEntity(requestDTO, city, customer);
+
         shipment = shipmentRepository.save(shipment);
 
         return ShipmentMapper.toDTO(shipment);

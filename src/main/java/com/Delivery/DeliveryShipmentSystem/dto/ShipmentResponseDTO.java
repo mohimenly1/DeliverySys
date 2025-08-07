@@ -6,6 +6,10 @@ public class ShipmentResponseDTO {
     private String description;
     private String cityName;
     private String customerName;
+    private Double deliveryPrice;
+    private String shipmentStatus;
+    private Double paymentAmount;
+    private String paymentStatus;
 
     // getters and setters
 
@@ -47,5 +51,38 @@ public class ShipmentResponseDTO {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+
+    public Double getDeliveryPrice() {
+        return deliveryPrice;
+    }
+
+    public void setDeliveryPrice(Double deliveryPrice) {
+        this.deliveryPrice = deliveryPrice;
+    }
+
+    public String getShipmentStatus() {
+        return shipmentStatus;
+    }
+
+    public void setShipmentStatus(String shipmentStatus) {
+        this.shipmentStatus = shipmentStatus;
+    }
+
+    public Double getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(Double paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }
