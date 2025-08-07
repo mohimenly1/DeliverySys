@@ -5,7 +5,7 @@ import com.Delivery.DeliveryShipmentSystem.model.*;
 
 public class ShipmentMapper {
 
-    // تحويل من DTO إلى Entity (هنا يجب استقبال ثلاث معاملات)
+
     public static Shipment toEntity(ShipmentRequestDTO dto, City city, Customer customer) {
         Shipment shipment = new Shipment();
         shipment.setTrackingCode(dto.getCode());
@@ -15,27 +15,27 @@ public class ShipmentMapper {
         return shipment;
     }
 
-    // تحويل من Entity إلى DTO
+
     public static ShipmentResponseDTO toDTO(Shipment shipment) {
         ShipmentResponseDTO dto = new ShipmentResponseDTO();
         dto.setId(shipment.getId());
         dto.setCode(shipment.getTrackingCode());
         dto.setDescription(shipment.getDescription());
         dto.setCityName(shipment.getCity().getName());
-        dto.setDeliveryPrice(shipment.getCity().getDeliveryCost());  // سعر التوصيل
+        dto.setDeliveryPrice(shipment.getCity().getDeliveryCost());
         dto.setCustomerName(shipment.getCustomer().getFullName());
 
-        // حالة الشحنة (enum) تتحول إلى String
+
         if (shipment.getStatus() != null) {
             dto.setShipmentStatus(shipment.getStatus().name());
         } else {
             dto.setShipmentStatus("UNKNOWN");
         }
 
-        // معلومات الدفع (قد لا تكون موجودة إذا لم يتم الدفع بعد)
+
         if (shipment.getPayment() != null) {
             dto.setPaymentAmount(shipment.getPayment().getAmount());
-            // إذا لديك حالة الدفع في Payment مثل Enum أو String
+
             dto.setPaymentStatus(shipment.getPayment().getStatus() != null ? shipment.getPayment().getStatus() : "UNKNOWN");
         } else {
             dto.setPaymentAmount(null);

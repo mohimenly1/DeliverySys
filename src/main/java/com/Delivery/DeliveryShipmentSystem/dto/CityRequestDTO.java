@@ -2,7 +2,7 @@ package com.Delivery.DeliveryShipmentSystem.dto;
 
 public class CityRequestDTO {
     private String name;
-    private Double deliveryCost;  // نفس الاسم في الـ Entity
+    private Double deliveryCost;
 
     // getters and setters
     public String getName() {

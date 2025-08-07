@@ -22,8 +22,14 @@ public class PaymentMapper {
     public static Payment toEntity(PaymentRequestDTO dto) {
         Payment payment = new Payment();
         payment.setAmount(dto.getAmount());
-        payment.setStatus(dto.getStatus());
+        payment.setStatus(
+                (dto.getStatus() != null && !dto.getStatus().trim().isEmpty())
+                        ? dto.getStatus()
+                        : "PAID"
+        );
 
+        payment.setMethod(dto.getMethod());
         return payment;
     }
+
 }

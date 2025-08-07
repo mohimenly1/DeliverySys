@@ -25,6 +25,15 @@ public class ShipmentController {
         return shipmentService.createShipment(dto);
     }
 
+    @PutMapping("/{id}/status")
+    public ShipmentResponseDTO updateShipmentStatus(
+            @PathVariable Long id,
+            @RequestParam("status") String status
+    ) {
+        return shipmentService.updateShipmentStatus(id, status);
+    }
+
+
     @GetMapping("/{id}")
     public ShipmentResponseDTO getShipmentById(@PathVariable Long id) {
         return shipmentService.getShipmentById(id);

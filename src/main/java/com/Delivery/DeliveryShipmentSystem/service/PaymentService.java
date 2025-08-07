@@ -5,6 +5,7 @@ import com.Delivery.DeliveryShipmentSystem.dto.PaymentResponseDTO;
 import com.Delivery.DeliveryShipmentSystem.model.Payment;
 import com.Delivery.DeliveryShipmentSystem.model.Shipment;
 import com.Delivery.DeliveryShipmentSystem.mapper.PaymentMapper;
+import com.Delivery.DeliveryShipmentSystem.model.ShipmentStatus;
 import com.Delivery.DeliveryShipmentSystem.repository.PaymentRepository;
 import com.Delivery.DeliveryShipmentSystem.repository.ShipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,30 @@ public class PaymentService {
     }
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO dto) {
+        System.out.println("=== Received payment request ===");
+        System.out.println("Amount: " + dto.getAmount());
+        System.out.println("Method: " + dto.getMethod());
+        System.out.println("Shipment ID: " + dto.getShipmentId());
+
         Payment payment = PaymentMapper.toEntity(dto);
 
         if (dto.getShipmentId() != null) {
             Shipment shipment = shipmentRepository.findById(dto.getShipmentId()).orElse(null);
-            payment.setShipment(shipment);
+            if (shipment != null) {
+                payment.setShipment(shipment);
+                shipment.setStatus(ShipmentStatus.valueOf("PAID"));
+                shipmentRepository.save(shipment);
+            } else {
+                System.out.println("Shipment not found!");
+            }
         }
 
-        return PaymentMapper.toDTO(paymentRepository.save(payment));
+        Payment saved = paymentRepository.save(payment);
+        System.out.println("Payment saved with ID: " + saved.getId());
+        return PaymentMapper.toDTO(saved);
     }
+
+
 
     public PaymentResponseDTO getPaymentById(Long id) {
         return paymentRepository.findById(id)

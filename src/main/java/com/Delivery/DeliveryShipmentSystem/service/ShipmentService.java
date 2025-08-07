@@ -54,4 +54,19 @@ public class ShipmentService {
         shipmentRepository.deleteById(id);
     }
 
+    public ShipmentResponseDTO updateShipmentStatus(Long id, String status) {
+        Shipment shipment = shipmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("الشحنة غير موجودة"));
+
+        try {
+            ShipmentStatus newStatus = ShipmentStatus.valueOf(status);
+            shipment.setStatus(newStatus);
+            shipment = shipmentRepository.save(shipment);
+            return ShipmentMapper.toDTO(shipment);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("حالة غير صالحة");
+        }
+    }
+
+
 }

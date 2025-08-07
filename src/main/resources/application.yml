@@ -17,6 +17,21 @@ spring:
         format_sql: true
 
 
+  mvc:
+    locale: ar
+    locale-resolver: fixed
+    message-codes-resolver:
+      format: PREFIX_ERROR_CODE
+    dispatch-options-request: true
+    content negotiation:
+      favor-path-extension: false
+    charset:
+      default: UTF-8
+
 server:
   port: 9090
-
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
